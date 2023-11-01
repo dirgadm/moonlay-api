@@ -1,0 +1,20 @@
+{
+  "debug": true,
+  "server": {
+    "address": ":9090"
+  },
+  "context":{
+    "timeout":2
+  },
+  "database": {
+      "host": "localhost",
+      "port": "5432",
+      "user": "user",
+      "pass": "password",
+      "name": "moonlay"
+  },
+  "jwt":{
+    "key":"V3ryS3cur3!*Jwt"
+  }
+
+}

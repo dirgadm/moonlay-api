@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  postgres:
+    image: postgres:13 
+    container_name: moonlay_sql
+    volumes:
+      - ./moonlay.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=moonlay
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "moonlay", "-U", "user"]
+      timeout: 5s
+      retries: 10
