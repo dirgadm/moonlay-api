@@ -22,9 +22,15 @@ func (m *Lists) TableName() string {
 type ListsUsecase interface {
 	GetList(ctx context.Context, offset int, limit int, search string) (res []dto.ListsResponse, total int64, err error)
 	GetDetail(ctx context.Context, id int) (res dto.ListsResponse, err error)
+	Create(ctx context.Context, req dto.ListsRequest) (err error)
+	Update(ctx context.Context, req dto.ListsRequest) (err error)
+	Delete(ctx context.Context, id int) (res dto.ListsResponse, err error)
 }
 
 type ListsRepository interface {
 	GetList(ctx context.Context, offset int, limit int, search string) (lists []Lists, count int64, err error)
 	GetDetail(ctx context.Context, id int) (list Lists, err error)
+	Create(ctx context.Context, lists *Lists) (err error)
+	Update(ctx context.Context, lists *Lists) (err error)
+	Delete(ctx context.Context, id int) (list Lists, err error)
 }
