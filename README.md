@@ -1,6 +1,5 @@
 # Moonlay API Assessment
-```
-```
+
 ### Teknologi dan library digunakan:
 | Teknologi   | Version | Link |
 | ----------- | ---------------- | ------------------- |
