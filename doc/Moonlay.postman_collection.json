@@ -1,0 +1,371 @@
+{
+	"info": {
+		"_postman_id": "9a9fd502-8424-40db-9cc8-64786f319e17",
+		"name": "Moonlay",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1717172"
+	},
+	"item": [
+		{
+			"name": "Upload",
+			"item": [
+				{
+					"name": "Upload",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key2",
+									"type": "file",
+									"src": "/C:/Users/dmeli/Downloads/upload_2.txt"
+								},
+								{
+									"key": "key1",
+									"type": "file",
+									"src": "/C:/Users/dmeli/Downloads/upload_1.txt"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/upload",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "List",
+			"item": [
+				{
+					"name": "Get List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/list?page=1&per_page=2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"list"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "List 1",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/list/4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"list",
+								"4"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "List 1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"Task 11/2\",\r\n    \"description\":\"Pengerjaan hari ini\",\r\n    \"files\":[\"upload_2.txt\",\"upload_1.txt\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/list",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"list"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "List 1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/list/11",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"list",
+								"11"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "List 1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"Task Dirga\",\r\n    \"description\":\"Pengerjaan Task hari inssi\",\r\n    \"files\":[\"upload_2.txt\",\"upload_5.txt\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/list/4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"list",
+								"4"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "List 1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SubList",
+			"item": [
+				{
+					"name": "Get SubList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/sublist?page=1&per_page=2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"sublist"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "2"
+								},
+								{
+									"key": "search",
+									"value": "List 2",
+									"disabled": true
+								},
+								{
+									"key": "list_id",
+									"value": "4",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get SubList Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/sublist/5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"sublist",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"list_id\":4,\r\n    \"title\":\"SubTask 11/2\",\r\n    \"description\":\"Pengerjaan sub task hari ini\",\r\n    \"files\":[\"upload_2.txt\",\"upload_1.txt\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/sublist",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"sublist"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "List 1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/sublist/4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"sublist",
+								"4"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "List 1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"list_id\":4,\r\n    \"title\":\"SubTask 5\",\r\n    \"description\":\"Pengerjaan SuibTask hari inssi\",\r\n    \"files\":[\"upload_2.txt\",\"upload_3.txt\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/sublist/5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"sublist",
+								"5"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "List 1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
