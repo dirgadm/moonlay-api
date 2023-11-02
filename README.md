@@ -11,7 +11,6 @@
 | Docker | v24.0.6 or later |  |
 | Docker compose| v12.21.0 or later |  |
 <br>
-```
 
 ## To Do
     install docker dan docker-compose
@@ -20,9 +19,9 @@
     clone repo [https://github.com/dirgadm/moonlay-api]
 
 ## Ruuning Server
-1. command: *docker compose up -d*, Menjalankan file docker compose di sisi background, sekaligus melakukan migrasi sql ke database postgre, migrasi file terdapat di file *moonlay.sql*
-2. command: *go run main.go* , menjalankan server dengan port 9090
-3. command: *go test* , masuk terlebih dahulu ke directory yang akan dilakukan unit test, dan *go test -cover* untuk melihat coverage dari unit test
+    1. command: *docker compose up -d*, Menjalankan file docker compose di sisi background, sekaligus melakukan migrasi sql ke database postgre, migrasi file terdapat di file *moonlay.sql*
+    2. command: *go run main.go* , menjalankan server dengan port 9090
+    3. command: *go test* , masuk terlebih dahulu ke directory yang akan dilakukan unit test, dan *go test -cover* untuk melihat coverage dari unit test
     ```
 
 ## Endpoint Testing 
