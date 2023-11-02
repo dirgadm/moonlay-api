@@ -10,12 +10,10 @@ import (
 	"github.com/labstack/gommon/log"
 )
 
-// CartHandler  represent the httphandler for Cart
 type ListsHandler struct {
 	LUsecase domain.ListsUsecase
 }
 
-// NewCartHandler will initialize the Cart resources endpoint
 func NewListsHandler(e *echo.Echo, ps domain.ListsUsecase) {
 	handler := &ListsHandler{
 		LUsecase: ps,
