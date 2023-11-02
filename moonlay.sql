@@ -22,8 +22,8 @@ CREATE TABLE IF NOT EXISTS sub_lists (
 -- Create a table to manage uploaded files
 CREATE TABLE IF NOT EXISTS uploaded_files (
     id SERIAL PRIMARY KEY,
-    list_id INT REFERENCES lists(id) ON DELETE CASCADE,
-    sub_list_id INT REFERENCES sub_lists(id) ON DELETE CASCADE,
+    list_id INT NOT NULL,
+    sub_list_id INT NOT NULL,
     file_name VARCHAR(255) NOT NULL,
     created_at timestamp DEFAULT CURRENT_TIMESTAMP,
     updated_at timestamp DEFAULT NULL
