@@ -24,7 +24,7 @@ type ListsUsecase interface {
 	GetDetail(ctx context.Context, id int) (res dto.ListsResponse, err error)
 	Create(ctx context.Context, req dto.ListsRequest) (err error)
 	Update(ctx context.Context, req dto.ListsRequest) (err error)
-	Delete(ctx context.Context, id int) (res dto.ListsResponse, err error)
+	Delete(ctx context.Context, id int) (err error)
 }
 
 type ListsRepository interface {
@@ -32,5 +32,5 @@ type ListsRepository interface {
 	GetDetail(ctx context.Context, id int) (list Lists, err error)
 	Create(ctx context.Context, lists *Lists) (err error)
 	Update(ctx context.Context, lists *Lists) (err error)
-	Delete(ctx context.Context, id int) (list Lists, err error)
+	Delete(ctx context.Context, lists *Lists) (err error)
 }

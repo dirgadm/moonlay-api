@@ -22,6 +22,7 @@ import (
 	_subListRepo "project-version3/moonlay-api/service/sublists/repository"
 	_subListsUsecase "project-version3/moonlay-api/service/sublists/usecase"
 	_uploadHandler "project-version3/moonlay-api/service/upload/delivery"
+	_uploadRepo "project-version3/moonlay-api/service/upload/repository"
 	_uploadUsecase "project-version3/moonlay-api/service/upload/usecase"
 )
 
@@ -100,10 +101,11 @@ func main() {
 	// setup repo
 	listsRepo := _listRepo.NewlListsRepository(gormDB)
 	sublistsRepo := _subListRepo.NewlSubListsRepository(gormDB)
+	uploadRepo := _uploadRepo.NewlUploadRepository(gormDB)
 
 	// setup usecase
-	listsUsecase := _listsUsecase.NewListsUsecase(listsRepo, timeoutContext)
-	subListsUsecase := _subListsUsecase.NewSubListsUsecase(sublistsRepo, listsRepo, timeoutContext)
+	listsUsecase := _listsUsecase.NewListsUsecase(listsRepo, sublistsRepo, uploadRepo, timeoutContext)
+	subListsUsecase := _subListsUsecase.NewSubListsUsecase(sublistsRepo, listsRepo, uploadRepo, timeoutContext)
 	uploadUsecase := _uploadUsecase.NewUploadUsecase(timeoutContext)
 
 	// setup handler

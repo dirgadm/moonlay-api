@@ -4,6 +4,7 @@ import (
 	"context"
 	"time"
 
+	"project-version3/moonlay-api/pkg/ehttp"
 	"project-version3/moonlay-api/service/domain"
 	"project-version3/moonlay-api/service/domain/dto"
 
@@ -13,13 +14,15 @@ import (
 type subListsUsecase struct {
 	subListsRepo domain.SubListsRepository
 	listsRepo    domain.ListsRepository
+	uploadRepo   domain.UploadRepository
 }
 
 // NewListsUsecase will create new an articleUsecase object representation of domain.ListsUsecase interface
-func NewSubListsUsecase(u domain.SubListsRepository, l domain.ListsRepository, timeout time.Duration) domain.SubListsUsecase {
+func NewSubListsUsecase(u domain.SubListsRepository, l domain.ListsRepository, uf domain.UploadRepository, timeout time.Duration) domain.SubListsUsecase {
 	return &subListsUsecase{
 		subListsRepo: u,
 		listsRepo:    l,
+		uploadRepo:   uf,
 	}
 }
 
@@ -92,6 +95,125 @@ func (s *subListsUsecase) GetDetail(ctx context.Context, id int) (res dto.SubLis
 			CreatedAt:   list.CreatedAt,
 			UpdatedAt:   list.UpdatedAt,
 		},
+	}
+
+	return
+}
+
+func (s *subListsUsecase) Update(ctx context.Context, req dto.SubListsRequest) (err error) {
+
+	var list domain.Lists
+	list, err = s.listsRepo.GetDetail(ctx, req.ListId)
+	if err != nil {
+		log.Error(err)
+		return
+	}
+	// validate sublist
+	var sublist domain.SubLists
+	sublist, err = s.subListsRepo.GetDetail(ctx, req.Id)
+	if err != nil {
+		log.Error(err)
+		err = ehttp.ErrorOutput("id", "The list is invalid")
+		return
+	}
+
+	if len(req.Files) > 0 {
+		if err = s.uploadRepo.DeleteBySubListId(ctx, sublist.Id); err != nil {
+			log.Error(err)
+			err = ehttp.ErrorOutput("id", "Failed to deleted file")
+			return
+		}
+
+		for _, v := range req.Files {
+			upload := &domain.UploadedFile{
+				ListId:    0,
+				SubListId: sublist.Id,
+				FileName:  v,
+				UpdatedAt: time.Now(),
+			}
+			err = s.uploadRepo.Create(ctx, upload)
+			if err != nil {
+				log.Error(err)
+				return
+			}
+		}
+
+	}
+	sublist.Title = req.Title
+	sublist.ListId = list.Id
+	sublist.Description = req.Description
+	err = s.subListsRepo.Update(ctx, &sublist)
+	if err != nil {
+		log.Error(err)
+		return
+	}
+
+	return
+}
+
+func (s *subListsUsecase) Create(ctx context.Context, req dto.SubListsRequest) (err error) {
+
+	var list domain.Lists
+	list, err = s.listsRepo.GetDetail(ctx, req.ListId)
+	if err != nil {
+		log.Error(err)
+		return
+	}
+	// var list domain.Lists
+	sublist := &domain.SubLists{
+		Title:       req.Title,
+		ListId:      list.Id,
+		Description: req.Description,
+		Priority:    1,
+		CreatedAt:   time.Now(),
+	}
+	err = s.subListsRepo.Create(ctx, sublist)
+	if err != nil {
+		log.Error(err)
+		return
+	}
+
+	if len(req.Files) > 0 {
+		for _, v := range req.Files {
+			upload := &domain.UploadedFile{
+				ListId:    0,
+				SubListId: sublist.Id,
+				FileName:  v,
+				UpdatedAt: time.Now(),
+			}
+			err = s.uploadRepo.Create(ctx, upload)
+			if err != nil {
+				log.Error(err)
+				return
+			}
+		}
+
+	}
+
+	return
+}
+
+func (s *subListsUsecase) Delete(ctx context.Context, id int) (err error) {
+
+	var sublist domain.SubLists
+	sublist, err = s.subListsRepo.GetDetail(ctx, id)
+	if err != nil {
+		log.Error(err)
+		return
+	}
+
+	// delete file based on list id
+	if err = s.uploadRepo.DeleteBySubListId(ctx, sublist.Id); err != nil {
+		log.Error(err)
+		err = ehttp.ErrorOutput("id", "Failed to deleted file")
+		return
+	}
+
+	// delete list based id
+	if err = s.subListsRepo.Delete(ctx, &sublist); err != nil {
+		log.Error(err)
+		err = ehttp.ErrorOutput("id", "Failed to deleted list")
+		return
 	}
 
 	return

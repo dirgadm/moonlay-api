@@ -12,6 +12,7 @@ type ListsResponse struct {
 }
 
 type ListsRequest struct {
+	Id          int      `json:"id"`
 	Title       string   `json:"title" validate:"required"`
 	Description string   `json:"description" validate:"required"`
 	Files       []string `json:"files"`

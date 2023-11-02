@@ -16,6 +16,8 @@ type SubListsResponse struct {
 }
 
 type SubListsRequest struct {
+	Id          int      `json:"id"`
+	ListId      int      `json:"list_id"`
 	Title       string   `json:"title" validate:"required"`
 	Description string   `json:"description" validate:"required"`
 	Files       []string `json:"files"`

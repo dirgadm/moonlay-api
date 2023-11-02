@@ -36,3 +36,18 @@ func (m *listsRepository) GetDetail(ctx context.Context, id int) (lists domain.L
 	err = m.Conn.Where("id = ?", id).First(&lists).Error
 	return
 }
+
+func (m *listsRepository) Create(ctx context.Context, lists *domain.Lists) (err error) {
+	err = m.Conn.Create(&lists).Error
+	return
+}
+
+func (m *listsRepository) Update(ctx context.Context, lists *domain.Lists) (err error) {
+	err = m.Conn.Save(&lists).Error
+	return
+}
+
+func (m *listsRepository) Delete(ctx context.Context, lists *domain.Lists) (err error) {
+	err = m.Conn.Delete(&lists).Error
+	return
+}

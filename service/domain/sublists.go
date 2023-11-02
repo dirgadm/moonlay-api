@@ -25,7 +25,7 @@ type SubListsUsecase interface {
 	GetDetail(ctx context.Context, id int) (res dto.SubListsResponse, err error)
 	Create(ctx context.Context, req dto.SubListsRequest) (err error)
 	Update(ctx context.Context, req dto.SubListsRequest) (err error)
-	Delete(ctx context.Context, id int) (res dto.SubListsResponse, err error)
+	Delete(ctx context.Context, id int) (err error)
 }
 
 type SubListsRepository interface {
@@ -33,5 +33,5 @@ type SubListsRepository interface {
 	GetDetail(ctx context.Context, id int) (sublist SubLists, err error)
 	Create(ctx context.Context, sublists *SubLists) (err error)
 	Update(ctx context.Context, sublists *SubLists) (err error)
-	Delete(ctx context.Context, id int) (list SubLists, err error)
+	Delete(ctx context.Context, sublists *SubLists) (err error)
 }
