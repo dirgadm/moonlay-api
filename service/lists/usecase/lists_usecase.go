@@ -56,6 +56,20 @@ func (s *listsUsecase) GetDetail(ctx context.Context, id int) (res dto.ListsResp
 		return
 	}
 
+	var sublist []domain.SubLists
+	sublist, _, err = s.subListsRepo.GetList(ctx, 0, 100, "", list.Id)
+	if err != nil {
+		log.Error(err)
+		return
+	}
+
+	var files []domain.UploadedFile
+	files, _, err = s.uploadRepo.GetListByListId(ctx, 0, 100, "", list.Id)
+	if err != nil {
+		log.Error(err)
+		return
+	}
+
 	res = dto.ListsResponse{
 		Id:          list.Id,
 		Title:       list.Title,
@@ -63,6 +77,36 @@ func (s *listsUsecase) GetDetail(ctx context.Context, id int) (res dto.ListsResp
 		Priority:    list.Priority,
 		CreatedAt:   list.CreatedAt,
 		UpdatedAt:   list.UpdatedAt,
+	}
+
+	var subListArrRes []dto.SubListsResponse
+	var subListRes dto.SubListsResponse
+	if len(sublist) > 0 {
+		for _, v := range sublist {
+			subListRes = dto.SubListsResponse{
+				Id:          v.Id,
+				ListId:      v.ListId,
+				Title:       v.Title,
+				Description: v.Description,
+				Priority:    v.Priority,
+				CreatedAt:   v.CreatedAt,
+				UpdatedAt:   v.UpdatedAt,
+			}
+			subListArrRes = append(subListArrRes, subListRes)
+		}
+		res.SubList = subListArrRes
+	}
+
+	var filesArrRes []dto.UploadResponse
+	var filesRes dto.UploadResponse
+	if len(files) > 0 {
+		for _, v := range files {
+			filesRes = dto.UploadResponse{
+				FileName: v.FileName,
+			}
+			filesArrRes = append(filesArrRes, filesRes)
+		}
+		res.Files = filesArrRes
 	}
 
 	return
@@ -166,7 +210,7 @@ func (s *listsUsecase) Delete(ctx context.Context, id int) (err error) {
 
 	// delete file based on sublist id and sublist itself
 	var subLists []domain.SubLists
-	subLists, _, err = s.subListsRepo.GetList(ctx, 0, 0, "", list.Id)
+	subLists, _, err = s.subListsRepo.GetList(ctx, 0, 100, "", list.Id)
 	for _, v := range subLists {
 		if err = s.uploadRepo.DeleteBySubListId(ctx, v.Id); err != nil {
 			log.Error(err)

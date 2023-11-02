@@ -2,6 +2,7 @@ package usecase
 
 import (
 	"context"
+	"errors"
 	"time"
 
 	"project-version3/moonlay-api/pkg/ehttp"
@@ -79,6 +80,13 @@ func (s *subListsUsecase) GetDetail(ctx context.Context, id int) (res dto.SubLis
 		return
 	}
 
+	var files []domain.UploadedFile
+	files, _, err = s.uploadRepo.GetListBySubListId(ctx, 0, 100, "", subList.Id)
+	if err != nil {
+		log.Error(err)
+		return
+	}
+
 	res = dto.SubListsResponse{
 		Id:          subList.Id,
 		Title:       subList.Title,
@@ -95,6 +103,18 @@ func (s *subListsUsecase) GetDetail(ctx context.Context, id int) (res dto.SubLis
 			CreatedAt:   list.CreatedAt,
 			UpdatedAt:   list.UpdatedAt,
 		},
+	}
+
+	var filesArrRes []dto.UploadResponse
+	var filesRes dto.UploadResponse
+	if len(files) > 0 {
+		for _, v := range files {
+			filesRes = dto.UploadResponse{
+				FileName: v.FileName,
+			}
+			filesArrRes = append(filesArrRes, filesRes)
+		}
+		res.Files = filesArrRes
 	}
 
 	return
@@ -114,6 +134,12 @@ func (s *subListsUsecase) Update(ctx context.Context, req dto.SubListsRequest) (
 	if err != nil {
 		log.Error(err)
 		err = ehttp.ErrorOutput("id", "The list is invalid")
+		return
+	}
+
+	if req.ListId != sublist.ListId {
+		log.Error(err)
+		err = ehttp.ErrorOutput("id", "This sublist not belongs to the list. Check list Id")
 		return
 	}
 
@@ -153,6 +179,11 @@ func (s *subListsUsecase) Update(ctx context.Context, req dto.SubListsRequest) (
 
 func (s *subListsUsecase) Create(ctx context.Context, req dto.SubListsRequest) (err error) {
 
+	if req.ListId == 0 {
+		err = errors.New("List id is required ")
+		log.Error(err)
+		return
+	}
 	var list domain.Lists
 	list, err = s.listsRepo.GetDetail(ctx, req.ListId)
 	if err != nil {

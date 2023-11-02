@@ -1,4 +1,4 @@
-# Superindo API Assessment
+# Moonlay API Assessment
 
 ## Requirment tools
     Docker versi 24.0.6 [https://docs.docker.com/desktop/install/windows-install/]

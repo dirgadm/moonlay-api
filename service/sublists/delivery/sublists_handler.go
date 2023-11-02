@@ -112,6 +112,7 @@ func (h SubListsHandler) Create(c echo.Context) (err error) {
 	validator := validator.New()
 
 	var req dto.SubListsRequest
+
 	if err = ctx.Bind(&req); err != nil {
 		log.Error(err)
 		return ctx.Serve(err)
