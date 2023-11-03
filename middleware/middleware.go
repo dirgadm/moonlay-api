@@ -13,7 +13,7 @@ import (
 	"github.com/golang-jwt/jwt"
 	"github.com/spf13/viper"
 
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 )
 
 // Middleware defines object for order api custom middleware

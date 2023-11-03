@@ -5,7 +5,7 @@ import (
 	"project-version3/moonlay-api/service/domain"
 	"project-version3/moonlay-api/service/domain/dto"
 
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 	"github.com/labstack/gommon/log"
 )
 

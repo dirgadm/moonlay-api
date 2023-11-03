@@ -9,8 +9,8 @@ import (
 	"project-version3/moonlay-api/pkg/ehttp"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/spf13/viper"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
