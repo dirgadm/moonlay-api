@@ -20,7 +20,7 @@
 ## Ruuning Server
     1. command: *docker compose up -d*, Menjalankan file docker compose di sisi background, sekaligus melakukan migrasi sql ke database postgre, migrasi file terdapat di file *moonlay.sql*
     2. command: *go run main.go* , menjalankan server dengan port 9090
-    3. command: *go test* , masuk terlebih dahulu ke directory yang akan dilakukan unit test, dan *go test -cover* untuk melihat coverage dari unit test
+    3. command: *go test* , masuk terlebih dahulu ke directory repository yang akan dilakukan unit test, dan *go test -cover* untuk melihat coverage dari unit test
     ```
 
 ## Endpoint Testing 
