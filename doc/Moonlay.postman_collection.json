@@ -52,7 +52,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/list?page=1&per_page=2",
+							"raw": "{{base_url}}/list",
 							"host": [
 								"{{base_url}}"
 							],
@@ -62,16 +62,18 @@
 							"query": [
 								{
 									"key": "search",
-									"value": "List 1",
+									"value": "inssi",
 									"disabled": true
 								},
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"disabled": true
 								},
 								{
 									"key": "per_page",
-									"value": "2"
+									"value": "2",
+									"disabled": true
 								}
 							]
 						}
@@ -84,13 +86,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/list/4",
+							"raw": "{{base_url}}/list/1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"list",
-								"4"
+								"1"
 							],
 							"query": [
 								{
@@ -110,7 +112,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\":\"Task 11/2\",\r\n    \"description\":\"Pengerjaan hari ini\",\r\n    \"files\":[\"upload_2.txt\",\"upload_1.txt\"]\r\n}",
+							"raw": "{\r\n    \"title\":\"Task 11/3\",\r\n    \"description\":\"Pengerjaan hari ini\",\r\n    \"files\":[\"upload_2.txt\",\"upload_1.txt\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -151,13 +153,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/list/11",
+							"raw": "{{base_url}}/list/1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"list",
-								"11"
+								"1"
 							],
 							"query": [
 								{
@@ -177,7 +179,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\":\"Task Dirga\",\r\n    \"description\":\"Pengerjaan Task hari inssi\",\r\n    \"files\":[\"upload_2.txt\",\"upload_5.txt\"]\r\n}",
+							"raw": "{\r\n    \"title\":\"Task Final\",\r\n    \"description\":\"Hallo task hari ini\",\r\n    \"files\":[\"upload_1.txt\",\"upload_4.txt\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -215,7 +217,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/sublist?page=1&per_page=2",
+							"raw": "{{base_url}}/sublist?list_id=4",
 							"host": [
 								"{{base_url}}"
 							],
@@ -225,21 +227,22 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"disabled": true
 								},
 								{
 									"key": "per_page",
-									"value": "2"
+									"value": "1",
+									"disabled": true
 								},
 								{
 									"key": "search",
-									"value": "List 2",
+									"value": "Task 5",
 									"disabled": true
 								},
 								{
 									"key": "list_id",
-									"value": "4",
-									"disabled": true
+									"value": "4"
 								}
 							]
 						}
@@ -252,26 +255,26 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/sublist/5",
+							"raw": "{{base_url}}/sublist/4",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"sublist",
-								"5"
+								"4"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Create Copy",
+					"name": "Create",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"list_id\":4,\r\n    \"title\":\"SubTask 11/2\",\r\n    \"description\":\"Pengerjaan sub task hari ini\",\r\n    \"files\":[\"upload_2.txt\",\"upload_1.txt\"]\r\n}",
+							"raw": "{\r\n    \"list_id\":5,\r\n    \"title\":\"SubTask 11/3\",\r\n    \"description\":\"Pengerjaan sub task hari ini\",\r\n    \"files\":[\"upload_2.txt\",\"upload_1.txt\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -312,13 +315,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/sublist/4",
+							"raw": "{{base_url}}/sublist/5",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"sublist",
-								"4"
+								"5"
 							],
 							"query": [
 								{
@@ -338,7 +341,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"list_id\":4,\r\n    \"title\":\"SubTask 5\",\r\n    \"description\":\"Pengerjaan SuibTask hari inssi\",\r\n    \"files\":[\"upload_2.txt\",\"upload_3.txt\"]\r\n}",
+							"raw": "{\r\n    \"list_id\":4,\r\n    \"title\":\"SubTask 5a\",\r\n    \"description\":\"Pengerjaan hari ini\",\r\n    \"files\":[\"upload_1.txt\",\"upload_2.txt\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
