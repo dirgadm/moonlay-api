@@ -77,6 +77,8 @@ func main() {
 	// setup echo for request id
 	e.Use(middleware.RequestID())
 
+	e.Use(middleware.Logger())
+
 	// setup echo for secure
 	e.Use(middleware.Secure())
 
